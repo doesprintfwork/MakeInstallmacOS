@@ -17,8 +17,7 @@ def editinfoplist(location):
     del plist['Payload Image Info']
     plist.update({
         'Payload Image Info': dict(
-            URL = 'InstallESD.dmg'
-            version = ver
-            
+            URL = 'InstallESD.dmg',
+            version = ver,
         )}
     )
