@@ -18,6 +18,9 @@ def clear():
 
 neededfiles = [r"../AppleDiagnostics.chunklist", r"../AppleDiagnostics.dmg", r"../BaseSystem.chunklist", r"../BaseSystem.dmg", r"../InstallESDDmg.pkg", r"../InstallInfo.plist"]
 
+def editplist():
+    pass
+
 def packapp():
 
     title("Choose macOS Version")
@@ -34,8 +37,31 @@ def packapp():
     elif version == "Q":
         quit()
 
+    clear()
+
+    title("Packing Files to Application")
+
+    noline("Mounting BaseSystem.dmg... ")
     os.system("hdiutil attach ../BaseSystem.dmg")
-    shutil.copy(r"/Volumes/macOS Base System/Install macOS")
+    print("Done.")
+
+    noline("Copying Installer from BaseSystem.dmg... ")
+    shutil.copy(r"/Volumes/macOS Base System/Install macOS {}.app".format(version), r"./")
+    print("Done.")
+
+    noline("Making Directories... ")
+    os.makedirs(r"./Install macOS {}.app/Contents/SharedSupport".format(version))
+    print("Done.")
+
+    print("Copying Files...")
+    for f in neededfiles:
+        noline("Copying {}... ".format(neededfiles))
+        shutil.copy(neededfiles, r"./Install macOS {}.app/Contents/SharedSupport".format(version))
+        print("Done.")
+    print("Done.")
+
+    print("Editting InstallInfo.plist")
+    editplist()
 
 def convert():
     pass
@@ -70,7 +96,8 @@ def mainmenu():
         mainmenu()
 
 def main():
-    packapp()
+    checkfiles()
+    mainmenu()
 
 
 main()
