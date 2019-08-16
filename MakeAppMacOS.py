@@ -56,7 +56,7 @@ def packapp():
     print("Copying Files...")
     for f in neededfiles:
         noline("Copying {}... ".format(neededfiles))
-        shutil.copy(neededfiles, r"./Install macOS {}.app/Contents/SharedSupport".format(version))
+        shutil.copy(f, r"./Install macOS {}.app/Contents/SharedSupport".format(version))
         print("Done.")
     print("Done.")
 
