@@ -47,10 +47,10 @@ def packapp():
     diskname = ""
     if option == "1":
         version = "High Sierra"
-        diskname = "OS X Base System"
+        diskname = "'OS X Base System'"
     elif option == "2":
         version = "Mojave"
-        diskname = "macOS Base System"
+        diskname = "'macOS Base System'"
     elif option == "Q":
         quit()
     elif option == "M":
