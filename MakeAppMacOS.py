@@ -18,8 +18,20 @@ def clear():
 
 neededfiles = [r"../AppleDiagnostics.chunklist", r"../AppleDiagnostics.dmg", r"../BaseSystem.chunklist", r"../BaseSystem.dmg", r"../InstallESDDmg.pkg", r"../InstallInfo.plist"]
 
+def copyfiles(sharedsupportloc):
+    for f in neededfiles:
+        noline("Copying {}... ".format(neededfiles))
+        shutil.copy(f, sharedsupportloc)
+        print("Done.")
+
 def editplist():
-    pass
+    fp = open(r"./InstallInfo.plist","rb")
+    installinfo = plistlib.load(fp)
+    del installinfo["Payload Image Info"]["chunklistURL"]
+    del installinfo["Payload Image Info"]["chunklistid"]
+    installinfo["Payload Image Info"]["URL"] = "InstallESD.dmg"
+    installinfo["Payload Image Info"]["id"] = "com.apple.dmg.InstallESD"
+    plistlib.dump(installinfo, open(r"./InstallInfo.plist", "wb"))
 
 def packapp():
 
@@ -34,10 +46,15 @@ def packapp():
         version = "High Sierra"
     elif option == "2":
         version = "Mojave"
-    elif version == "Q":
+    elif option == "Q":
         quit()
+    elif option == "M":
+        mainmenu()
+    else:
+        packapp()
 
     clear()
+    sharedsupportloc = r"./Install macOS {}.app/Contents/SharedSupport".format(version)
 
     title("Packing Files to Application")
 
@@ -50,18 +67,27 @@ def packapp():
     print("Done.")
 
     noline("Making Directories... ")
-    os.makedirs(r"./Install macOS {}.app/Contents/SharedSupport".format(version))
+    os.makedirs(sharedsupportloc)
     print("Done.")
 
     print("Copying Files...")
-    for f in neededfiles:
-        noline("Copying {}... ".format(neededfiles))
-        shutil.copy(f, r"./Install macOS {}.app/Contents/SharedSupport".format(version))
-        print("Done.")
+    copyfiles(sharedsupportloc)
     print("Done.")
 
-    print("Editting InstallInfo.plist")
+    noline("Editting InstallInfo.plist... ")
+    os.chdir(sharedsupportloc)
     editplist()
+    print("Done.")
+
+    noline("Renaming InstallESD.dmg... ")
+    os.rename("InstallESDDmg.pkg", "InstallESD.dmg")
+    print("Done.")
+
+    print("All Done")
+    time.sleep(1)
+
+    mainmenu()
+    
 
 def convert():
     pass
@@ -99,5 +125,5 @@ def main():
     checkfiles()
     mainmenu()
 
-
-main()
+if __name__ == "__main__":
+    main()
