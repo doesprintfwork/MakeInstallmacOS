@@ -36,6 +36,7 @@ def editplist():
 def packapp():
 
     clear()
+    ### Here we choose our macOS Version
     title("Choose macOS Version")
     print("1: High Sierra")
     print("2: Mojave")
@@ -59,6 +60,9 @@ def packapp():
 
     title("Packing Files to Application")
 
+    # We need to grab the base of the App out
+    # from BaseSystem.dmg
+
     noline("Mounting BaseSystem.dmg... ")
     os.system("hdiutil attach ../BaseSystem.dmg")
     print("Done.")
@@ -71,6 +75,10 @@ def packapp():
     os.system("umount /Volumes/'macOS Base System'")
     print("Done.")
 
+    # We need to make a folder call
+    # SharedSupport inside the App.
+    # This is where we save our files.
+
     noline("Making Directories... ")
     os.makedirs(sharedsupportloc)
     print("Done.")
@@ -79,14 +87,27 @@ def packapp():
     copyfiles(sharedsupportloc)
     print("Done.")
 
+    # We need to edit the InstallInfo.plist
+    # to make sure we matches the settings
+    # we want.
+
     noline("Editting InstallInfo.plist... ")
     os.chdir(sharedsupportloc)
     editplist()
     print("Done.")
 
+    # We need to rename InstallESDDmg.pkg
+    # to InstallESD.dmg to match the settings
+    # in InstallInfo.plist
+
     noline("Renaming InstallESD.dmg... ")
     os.rename("InstallESDDmg.pkg", "InstallESD.dmg")
     print("Done.")
+
+    # While there are some aliases laying around
+    # in the installer, shutil.copy copies
+    # the original files. So we need to delete
+    # them and make them by our own.
 
     noline("Deleting Files... ")
     os.chdir(r"../Frameworks/OSInstallerSetup.framework")
@@ -109,8 +130,8 @@ def packapp():
     mainmenu()
     
 
-def convert():
-    pass
+# def convert():
+    # pass
 
 def checkfiles():
     clear()
@@ -137,7 +158,7 @@ def mainmenu():
     elif option == "1":
         packapp()
 #    elif option == "2":
-        convert()
+#        convert()
     else:
         mainmenu()
 
