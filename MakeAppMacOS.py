@@ -20,7 +20,7 @@ neededfiles = [r"../AppleDiagnostics.chunklist", r"../AppleDiagnostics.dmg", r".
 
 def copyfiles(sharedsupportloc):
     for f in neededfiles:
-        noline("Copying {}... ".format(f))
+        noline("    Copying {}... ".format(f))
         shutil.copy(f, sharedsupportloc)
         print("Done.")
 
@@ -67,6 +67,10 @@ def packapp():
     os.system("cp -rf /Volumes/'macOS Base System'/'Install macOS {}.app' ./'Install macOS {}.app'".format(version, version))
     print("Done.")
 
+    noline("Unmounting BaseSystem.dmg... ")
+    os.system("umount /Volumes/'macOS Base System'")
+    print("Done.")
+
     noline("Making Directories... ")
     os.makedirs(sharedsupportloc)
     print("Done.")
@@ -84,14 +88,14 @@ def packapp():
     os.rename("InstallESDDmg.pkg", "InstallESD.dmg")
     print("Done.")
 
-    noline("Deleting Files")
+    noline("Deleting Files... ")
     os.chdir(r"../Frameworks/OSInstallerSetup.framework")
     os.remove("OSInstallerSetup")
     shutil.rmtree("Resources")
     shutil.rmtree(r"Versions/Current")
     print("Done")
 
-    noline("Creating Alias")
+    noline("Creating Alias... ")
     os.chdir("Versions")
     os.system("ln -fs A Current")
     os.chdir("../")
