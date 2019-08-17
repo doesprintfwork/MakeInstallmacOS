@@ -20,7 +20,7 @@ neededfiles = [r"../AppleDiagnostics.chunklist", r"../AppleDiagnostics.dmg", r".
 
 def copyfiles(sharedsupportloc):
     for f in neededfiles:
-        noline("Copying {}... ".format(neededfiles))
+        noline("Copying {}... ".format(f))
         shutil.copy(f, sharedsupportloc)
         print("Done.")
 
@@ -35,6 +35,7 @@ def editplist():
 
 def packapp():
 
+    clear()
     title("Choose macOS Version")
     print("1: High Sierra")
     print("2: Mojave")
@@ -63,7 +64,7 @@ def packapp():
     print("Done.")
 
     noline("Copying Installer from BaseSystem.dmg... ")
-    shutil.copy(r"/Volumes/macOS Base System/Install macOS {}.app".format(version), r"./")
+    os.system("cp -rf /Volumes/'macOS Base System'/'Install macOS {}.app' ./'Install macOS {}.app'".format(version, version))
     print("Done.")
 
     noline("Making Directories... ")
@@ -81,6 +82,22 @@ def packapp():
 
     noline("Renaming InstallESD.dmg... ")
     os.rename("InstallESDDmg.pkg", "InstallESD.dmg")
+    print("Done.")
+
+    noline("Deleting Files")
+    os.chdir(r"../Frameworks/OSInstallerSetup.framework")
+    os.remove("OSInstallerSetup")
+    shutil.rmtree("Resources")
+    os.remove("Versions/Current")
+    print("Done")
+
+    noline("Creating Alias")
+    os.chdir("Versions")
+    os.system("ln -s A")
+    os.rename("A","Current")
+    os.chdir("../")
+    os.system("ln -s Versions/A/OSInstallerSetup")
+    os.system("ln -s Versions/A/Resources")
     print("Done.")
 
     print("All Done")
