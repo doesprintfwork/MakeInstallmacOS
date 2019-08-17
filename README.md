@@ -1,6 +1,6 @@
 # MakeInstallmacOS
 
-This tool needs used with downloaded FULL INSTALLER from gibMacOS (from CorpNewt)
+This tool needs used with downloaded FULL INSTALLER from [gibMacOS](https://github.com/corpnewt/gibMacOS) \(from CorpNewt\)
 
 ## Functions
 
@@ -10,4 +10,4 @@ This tool needs used with downloaded FULL INSTALLER from gibMacOS (from CorpNewt
 ## Requirements
 
 - Python 3.4 or above
-- Downloaded macOS Installer files from gibMacOS
+- Downloaded macOS Installer files from [gibMacOS](https://github.com/corpnewt/gibMacOS)
