@@ -163,6 +163,7 @@ def mainmenu():
         mainmenu()
 
 def main():
+    os.chdir("./")
     checkfiles()
     mainmenu()
 
