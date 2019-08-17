@@ -44,10 +44,13 @@ def packapp():
     print("M: Main Menu")
     option = input("Please enter an option: ")
     version = ""
+    diskname = ""
     if option == "1":
         version = "High Sierra"
+        diskname = "OS X Base System"
     elif option == "2":
         version = "Mojave"
+        diskname = "macOS Base System"
     elif option == "Q":
         quit()
     elif option == "M":
@@ -68,11 +71,11 @@ def packapp():
     print("Done.")
 
     noline("Copying Installer from BaseSystem.dmg... ")
-    os.system("cp -rf /Volumes/'macOS Base System'/'Install macOS {}.app' ./'Install macOS {}.app'".format(version, version))
+    os.system("cp -rf /Volumes/{}/'Install macOS {}.app' ./'Install macOS {}.app'".format(diskname, version, version))
     print("Done.")
 
     noline("Unmounting BaseSystem.dmg... ")
-    os.system("umount /Volumes/'macOS Base System'")
+    os.system("umount /Volumes/{}".format(diskname))
     print("Done.")
 
     # We need to make a folder call
