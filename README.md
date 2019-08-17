@@ -5,7 +5,6 @@ This tool needs used with downloaded FULL INSTALLER from [gibMacOS](https://gith
 ## Functions
 
 - Pack the downloaded Installer files to a full Install macOS Application.
-- Convert your USB Installer to a Full Installer.
 
 ## Requirements
 
