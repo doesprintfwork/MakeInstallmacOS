@@ -21,6 +21,7 @@ neededfiles = [r"../AppleDiagnostics.chunklist", r"../AppleDiagnostics.dmg", r".
 def copyfiles(sharedsupportloc):
     for f in neededfiles:
         noline("    Copying {}... ".format(f))
+
         shutil.copy(f, sharedsupportloc)
         print("Done.")
 
@@ -133,8 +134,28 @@ def packapp():
     mainmenu()
     
 
-# def convert():
-    # pass
+def SharedSupport():
+    clear()
+
+    title("Packing files to SharedSupport")
+
+    noline("Making Directories... ")
+    os.mkdir("SharedSupport")
+    print("Done.")
+
+    noline("Copying files... ")
+    copyfiles(r"./SharedSupport")
+    print("Done.")
+
+    noline("Editting InstallInfor.plist... ")
+    os.chdir(r"./SharedSupport")
+    editplist()
+    os.rename("InstallESDDmg.pkg", "InstallESD.dmg")
+    print("Done")
+
+    print("All Done.")
+    time.sleep(1)
+
 
 def checkfiles():
     clear()
@@ -152,16 +173,16 @@ def quit():
 def mainmenu():
     clear()
     title("Main Menu")
-    print("1: Pack files to an Install macOS Application")
-#    print("2: Convert Network Recovery macOS Installer USB to a Full Installer")
+    print("A: Pack files to an Install macOS Application")
+    print("P: Pack files to a folder (SharedSupport)")
     print("Q: Quit")
     option = input("Enter an option: ")
     if option == "Q" or option == "q":
         quit()
-    elif option == "1":
+    elif option == "A":
         packapp()
-#    elif option == "2":
-#        convert()
+    elif option == "P":
+        SharedSupport()
     else:
         mainmenu()
 
