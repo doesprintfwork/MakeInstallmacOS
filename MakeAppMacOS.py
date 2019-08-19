@@ -156,6 +156,8 @@ def SharedSupport():
     print("All Done.")
     time.sleep(1)
 
+    mainmenu()
+
 
 def checkfiles():
     clear()
@@ -165,6 +167,7 @@ def checkfiles():
         if isfile(f) == False:
             print("Missing Files.")
             sys.exit()
+    time.sleep(1)
 
 def quit():
     print("Goodbye! Have a good day!")
