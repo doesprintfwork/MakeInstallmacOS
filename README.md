@@ -5,6 +5,7 @@ This tool needs used with downloaded FULL INSTALLER from [gibMacOS](https://gith
 ## Functions
 
 - Pack the downloaded Installer files to a full Install macOS Application.
+- Pack files to SharedSupport for converting Internet Recovery Installer to a Full Installer.
 
 ## Requirements
 
