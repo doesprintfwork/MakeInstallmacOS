@@ -30,6 +30,7 @@ def checkfiles():
     for f in neededfiles:
         if isfile(f) == False:
             print("Missing Files.")
+            os.system("pause")
             sys.exit()
     time.sleep(1)
 
@@ -73,7 +74,7 @@ def SharedSupport():
     os.mkdir("SharedSupport")
     print("Done.")
 
-    noline("Copying files... ")
+    print("Copying files... ")
     copyfiles(r"./SharedSupport")
     print("Done.")
 
@@ -118,3 +119,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+os.system("pause")
