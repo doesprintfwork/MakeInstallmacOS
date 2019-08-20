@@ -47,6 +47,26 @@ def editplist():
 def SharedSupport():
     clear()
 
+    title("Choose macOS Version")
+    print("1: High Sierra")
+    print("2: Mojave")
+    print("Q: Quit")
+    print("M: Main Menu")
+    option = input("Please enter an option: ")
+    version = ""
+    diskname = ""
+    if option == "1":
+        version = "High Sierra"
+        diskname = "'OS X Base System'"
+    elif option == "2":
+        version = "Mojave"
+        diskname = "'macOS Base System'"
+    elif option == "Q":
+        quit()
+    elif option == "M":
+        mainmenu()
+    else:
+        SharedSupport()
     title("Packing files to SharedSupport")
 
     noline("Making Directories... ")
@@ -57,11 +77,21 @@ def SharedSupport():
     copyfiles(r"./SharedSupport")
     print("Done.")
 
-    noline("Editting InstallInfor.plist... ")
+    noline("Editting InstallInfo.plist... ")
     os.chdir(r"./SharedSupport")
     editplist()
     os.rename("InstallESDDmg.pkg", "InstallESD.dmg")
-    print("Done")
+    print("Done.")
+
+    print("Extracting files from BaseSystem.dmg...")
+    os.chdir(r"../")
+    l7z = input("Please Drag and Drop the 7zip.exe from your Program Files: ")
+    os.system("{} x BaseSystem.dmg > NUL:".format(l7z))
+    print("Done.")
+
+    noline("Moving files in place... ")
+    shutil.move(r"./SharedSupport", r"./{}/Install macOS {}.app/Contents".format(diskname, version))
+    print("Done.")
 
     print("All Done.")
     time.sleep(1)
@@ -71,7 +101,7 @@ def SharedSupport():
 def mainmenu():
     clear()
     title("Main Menu")
-    print("P: Pack files to a folder (SharedSupport)")
+    print("P: Pack files for creating a Full Installer")
     print("Q: Quit")
     option = input("Enter an option: ")
     if option == "Q" or option == "q":
@@ -82,7 +112,7 @@ def mainmenu():
         mainmenu()
 
 def main():
-    os.chdir("./")
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
     checkfiles()
     mainmenu()
 
