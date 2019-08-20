@@ -58,39 +58,48 @@ def SharedSupport():
     diskname = ""
     if option == "1":
         version = "High Sierra"
-        diskname = "'OS X Base System'"
+        diskname = "OS X Base System"
     elif option == "2":
         version = "Mojave"
-        diskname = "'macOS Base System'"
+        diskname = "macOS Base System"
     elif option == "Q":
         quit()
     elif option == "M":
         mainmenu()
     else:
         SharedSupport()
+
+    clear()
+
     title("Packing files to SharedSupport")
 
     noline("Making Directories... ")
+
     os.mkdir("SharedSupport")
     print("Done.")
 
     print("Copying files... ")
+
     copyfiles(r"./SharedSupport")
     print("Done.")
 
     noline("Editting InstallInfo.plist... ")
+
     os.chdir(r"./SharedSupport")
     editplist()
     os.rename("InstallESDDmg.pkg", "InstallESD.dmg")
     print("Done.")
 
     print("Extracting files from BaseSystem.dmg...")
+
     os.chdir(r"../")
-    l7z = input("Please Drag and Drop the 7zip.exe from your Program Files: ")
+    os.chdir(r"../")
+    l7z = input("Please Drag and Drop the 7z.exe from your Program Files: ")
     os.system("{} x BaseSystem.dmg > NUL:".format(l7z))
     print("Done.")
 
     noline("Moving files in place... ")
+
     shutil.move(r"./SharedSupport", r"./{}/Install macOS {}.app/Contents".format(diskname, version))
     print("Done.")
 
@@ -98,6 +107,10 @@ def SharedSupport():
     time.sleep(1)
 
     mainmenu()
+
+def quit():
+    print("Goodbye! Have a good day!")
+    sys.exit()
 
 def mainmenu():
     clear()
@@ -119,4 +132,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 os.system("pause")
