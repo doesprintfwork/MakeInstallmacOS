@@ -93,13 +93,12 @@ def SharedSupport():
     print("Extracting files from BaseSystem.dmg...")
 
     os.chdir(r"../")
-    os.chdir(r"../")
     l7z = input("Please Drag and Drop the 7z.exe from your Program Files: ")
-    os.system("{} x BaseSystem.dmg > NUL:".format(l7z))
+    os.system("{} x ../BaseSystem.dmg".format(l7z))
     print("Done.")
 
     noline("Moving files in place... ")
-
+    shutil.move(r"../{}".format(diskname), "./")
     shutil.move(r"./SharedSupport", r"./{}/Install macOS {}.app/Contents".format(diskname, version))
     print("Done.")
 
