@@ -2,6 +2,10 @@ import os, shutil, plistlib, time, sys
 
 line = "--------------------------------------------------"
 
+def quit():
+    print("Goodbye! Have a good day!")
+    sys.exit()
+
 def noline(string):
     print(string,end="")
 
@@ -98,7 +102,6 @@ def SharedSupport():
     print("Done.")
 
     noline("Moving files in place... ")
-    shutil.move(r"../{}".format(diskname), "./")
     shutil.move(r"./SharedSupport", r"./{}/Install macOS {}.app/Contents".format(diskname, version))
     print("Done.")
 
@@ -106,10 +109,6 @@ def SharedSupport():
     time.sleep(1)
 
     mainmenu()
-
-def quit():
-    print("Goodbye! Have a good day!")
-    sys.exit()
 
 def mainmenu():
     clear()
