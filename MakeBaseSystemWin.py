@@ -50,7 +50,7 @@ def editplist():
     installinfo["Payload Image Info"]["id"] = "com.apple.dmg.InstallESD"
     plistlib.dump(installinfo, open(r"./InstallInfo.plist", "wb"))
 
-def SharedSupport():
+def BaseSystem():
     clear()
 
     title("Choose macOS Version")
@@ -118,6 +118,30 @@ def SharedSupport():
 
     mainmenu()
 
+def SharedSupport():
+    clear()
+
+    title("Packing files to SharedSupport")
+
+    noline("Making Directories... ")
+    os.mkdir("SharedSupport")
+    print("Done.")
+
+    print("Copying files... ")
+    copyfiles(r"./SharedSupport")
+    print("Done.")
+
+    noline("Editting InstallInfor.plist... ")
+    os.chdir(r"./SharedSupport")
+    editplist()
+    os.rename("InstallESDDmg.pkg", "InstallESD.dmg")
+    print("Done")
+
+    print("All Done.")
+    time.sleep(1)
+
+    mainmenu()
+
 def mainmenu():
     clear()
     title("Main Menu")
@@ -126,7 +150,11 @@ def mainmenu():
     option = input("Enter an option: ")
     if option == "Q" or option == "q":
         quit()
+    elif option == "B" or option == "b":
+        os.chdir(os.path.dirname(os.path.realpath(__file__)))
+        BaseSystem()
     elif option == "P" or option == "p":
+        os.chdir(os.path.dirname(os.path.realpath(__file__)))
         SharedSupport()
     else:
         mainmenu()
