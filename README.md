@@ -1,6 +1,6 @@
 # MakeInstallmacOS
 
-This tool needs used with downloaded FULL INSTALLER from [gibMacOS](https://github.com/corpnewt/gibMacOS) \(from [CorpNewt](https://github.com/corpnewt)\)
+This tool needs to use with downloaded FULL INSTALLER from [gibMacOS](https://github.com/corpnewt/gibMacOS) \(from [CorpNewt](https://github.com/corpnewt)\)
 
 ## Functions
 
