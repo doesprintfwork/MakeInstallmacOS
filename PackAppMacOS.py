@@ -244,8 +244,8 @@ def mainmenu():
     clear()
     title("Main Menu")
     print("A: Pack files to an Install macOS Application")
-    print("B: Pack files to disk image")
-    print("P: Pack files to a folder (SharedSupport)")
+    print("B: Pack files to disk image (This will take a long time!)")
+    print("P: Pack files for convert the current Network Recovery Installer to a Full Installer (SharedSupport)")
     print("Q: Quit")
     option = input("Enter an option: ")
     if option == "Q" or option == "q":
