@@ -12,4 +12,5 @@ This tool needs to be used with downloaded FULL INSTALLER from [gibMacOS](https:
 ## Requirements
 
 - Python 3.4 or above
+- p7zip (macOS) or 7zip (Windows)
 - Downloaded macOS Installer files from [gibMacOS](https://github.com/corpnewt/gibMacOS)
