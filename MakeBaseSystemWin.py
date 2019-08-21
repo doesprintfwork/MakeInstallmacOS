@@ -4,6 +4,7 @@ line = "--------------------------------------------------"
 
 def quit():
     print("Goodbye! Have a good day!")
+    os.system("pause")
     sys.exit()
 
 def noline(string):
@@ -103,6 +104,13 @@ def SharedSupport():
 
     noline("Moving files in place... ")
     shutil.move(r"./SharedSupport", r"./{}/Install macOS {}.app/Contents".format(diskname, version))
+    print("Done.")
+
+    noline("Deleting files... ")
+    os.chdir(r"./{}".format(diskname))
+    shutil.rmtree(r"./.vol")
+    shutil.rmtree(r"./.HFS+ Private Directory Data_")
+    shutil.rmtree(r"./[HFS+ Private Data]")
     print("Done.")
 
     print("All Done.")
