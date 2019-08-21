@@ -68,7 +68,7 @@ def packapp():
     # from BaseSystem.dmg
 
     noline("Mounting BaseSystem.dmg... ")
-    os.system("hdiutil attach ../BaseSystem.dmg")
+    os.system("hdiutil attach ../BaseSystem.dmg > /dev/null")
     print("Done.")
 
     noline("Copying Installer from BaseSystem.dmg... ")
@@ -143,7 +143,7 @@ def SharedSupport():
     os.mkdir("SharedSupport")
     print("Done.")
 
-    noline("Copying files... ")
+    print("Copying files... ")
     copyfiles(r"./SharedSupport")
     print("Done.")
 
@@ -182,9 +182,11 @@ def mainmenu():
     option = input("Enter an option: ")
     if option == "Q" or option == "q":
         quit()
-    elif option == "A":
+    elif option == "A" or option == "a":
+        os.chdir(os.path.dirname(os.path.realpath(__file__)))
         packapp()
-    elif option == "P":
+    elif option == "P" or option == "p":
+        os.chdir(os.path.dirname(os.path.realpath(__file__)))
         SharedSupport()
     else:
         mainmenu()
