@@ -145,7 +145,8 @@ def SharedSupport():
 def mainmenu():
     clear()
     title("Main Menu")
-    print("P: Pack files for creating a Full Installer")
+    print("B: Pack files for creating a Full Installer")
+    print("P: Pack files for convert the current Network Recovery Installer to a Full Installer (SharedSupport)")
     print("Q: Quit")
     option = input("Enter an option: ")
     if option == "Q" or option == "q":
