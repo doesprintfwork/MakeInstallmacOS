@@ -4,8 +4,10 @@ This tool needs used with downloaded FULL INSTALLER from [gibMacOS](https://gith
 
 ## Functions
 
-- Pack the downloaded Installer files to a full Install macOS Application. (Only in macOS)
-- Pack files to SharedSupport for converting Internet Recovery Installer to a Full Installer.
+- Pack files to SharedSupport for converting Internet Recovery Installer to a Full Installer
+- Pack files to a folder for making a disk image with Transmac (Only in Windows)
+- Pack files to a full Install macOS Application (Only in macOS)
+- Pack files to a full Install macOS disk image base on BaseSystem.dmg (DMG file) (Only in macOS)
 
 ## Requirements
 
