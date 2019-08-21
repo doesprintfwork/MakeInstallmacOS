@@ -158,6 +158,73 @@ def SharedSupport():
 
     mainmenu()
 
+def packimg():
+    clear()
+
+    title("Choose macOS Version")
+    print("1: High Sierra")
+    print("2: Mojave")
+    print("Q: Quit")
+    print("M: Main Menu")
+    option = input("Please enter an option: ")
+    version = ""
+    diskname = ""
+    if option == "1":
+        version = "High Sierra"
+        diskname = "OS X Base System"
+    elif option == "2":
+        version = "Mojave"
+        diskname = "macOS Base System"
+    elif option == "Q":
+        quit()
+    elif option == "M":
+        mainmenu()
+    else:
+        SharedSupport()
+
+    clear()
+
+    title("Packing files to SharedSupport")
+
+    noline("Making Directories... ")
+
+    os.mkdir("SharedSupport")
+    print("Done.")
+
+    print("Copying files... ")
+
+    copyfiles(r"./SharedSupport")
+    print("Done.")
+
+    noline("Editting InstallInfo.plist... ")
+
+    os.chdir(r"./SharedSupport")
+    editplist()
+    os.rename("InstallESDDmg.pkg", "InstallESD.dmg")
+    print("Done.")
+
+    noline("Converting BaseSystem.dmg to have Read and Write Access... ")
+    os.chdir(r"../")
+    os.system("hdiutil convert -format UDRW -o ./BaseSystem.dmg ../BaseSystem.dmg")
+    print("Done.")
+
+    noline("Extend BaseSystem.dmg capacity... ")
+    os.system("hdiutil resize -size 8192m ./BaseSystem.dmg")
+    print("Done.")
+
+    noline("Mounting BaseSystem.dmg... ")
+    os.system("hdiutil attach ./BaseSystem.dmg")
+    print("Done.")
+
+    noline("Moving files in place... ")
+    shutil.move(r"./SharedSupport", r"/Volumes/{}/Install macOS {}.app/Contents".format(diskname, version))
+    print("Done.")
+
+
+    print("All Done.")
+    time.sleep(1)
+
+    mainmenu()
 
 def checkfiles():
     clear()
@@ -177,6 +244,7 @@ def mainmenu():
     clear()
     title("Main Menu")
     print("A: Pack files to an Install macOS Application")
+    print("B: Pack files to disk image")
     print("P: Pack files to a folder (SharedSupport)")
     print("Q: Quit")
     option = input("Enter an option: ")
@@ -185,6 +253,9 @@ def mainmenu():
     elif option == "A" or option == "a":
         os.chdir(os.path.dirname(os.path.realpath(__file__)))
         packapp()
+    elif option == "B" or option == "b":
+        os.chdir(os.path.dirname(os.path.realpath(__file__)))
+        packimg()
     elif option == "P" or option == "p":
         os.chdir(os.path.dirname(os.path.realpath(__file__)))
         SharedSupport()
