@@ -72,7 +72,7 @@ def packapp():
     print("Done.")
 
     noline("Copying Installer from BaseSystem.dmg... ")
-    os.system("cp -rf /Volumes/{}/'Install macOS {}.app' ./'Install macOS {}.app'".format(diskname, version, version))
+    os.system("cp -Rf /Volumes/{}/'Install macOS {}.app' ./'Install macOS {}.app'".format(diskname, version, version))
     print("Done.")
 
     noline("Unmounting BaseSystem.dmg... ")
@@ -106,26 +106,6 @@ def packapp():
 
     noline("Renaming InstallESD.dmg... ")
     os.rename("InstallESDDmg.pkg", "InstallESD.dmg")
-    print("Done.")
-
-    # While there are some aliases laying around
-    # in the installer, shutil.copy copies
-    # the original files. So we need to delete
-    # them and make them by our own.
-
-    noline("Deleting Files... ")
-    os.chdir(r"../Frameworks/OSInstallerSetup.framework")
-    os.remove("OSInstallerSetup")
-    shutil.rmtree("Resources")
-    shutil.rmtree(r"Versions/Current")
-    print("Done")
-
-    noline("Creating Alias... ")
-    os.chdir("Versions")
-    os.system("ln -fs A Current")
-    os.chdir("../")
-    os.system("ln -s Versions/A/OSInstallerSetup")
-    os.system("ln -s Versions/A/Resources")
     print("Done.")
 
     print("All Done")
