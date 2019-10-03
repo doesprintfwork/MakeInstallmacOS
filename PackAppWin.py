@@ -32,8 +32,9 @@ def copyfiles(sharedsupportloc):
 def checkfiles():
     clear()
     title("Checking Required Files...")
-    version = input("Please drag and drop the downloaded folder: ")
-    os.chdir(loc)
+    loc = input("Please drag and drop the downloaded folder: ")
+    print (loc)
+    os.system("cd {}".format(loc))
     time.sleep(0.5)
     for f in neededfiles:
         if isfile(f) == False:
@@ -42,7 +43,7 @@ def checkfiles():
             sys.exit()
     time.sleep(1)
 
-neededfiles = [r"../AppleDiagnostics.chunklist", r"../AppleDiagnostics.dmg", r"../BaseSystem.chunklist", r"../BaseSystem.dmg", r"../InstallESDDmg.pkg", r"../InstallInfo.plist"]
+neededfiles = [r"./AppleDiagnostics.chunklist", r"./AppleDiagnostics.dmg", r"./BaseSystem.chunklist", r"./BaseSystem.dmg", r"./InstallESDDmg.pkg", r"./InstallInfo.plist"]
 
 def editplist():
     fp = open(r"./InstallInfo.plist","rb")

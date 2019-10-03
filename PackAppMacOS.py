@@ -17,7 +17,7 @@ def isfile(string):
 def clear():
     os.system("clear")
 
-neededfiles = [r"../AppleDiagnostics.chunklist", r"../AppleDiagnostics.dmg", r"../BaseSystem.chunklist", r"../BaseSystem.dmg", r"../InstallESDDmg.pkg", r"../InstallInfo.plist"]
+neededfiles = [r"./AppleDiagnostics.chunklist", r"./AppleDiagnostics.dmg", r"./BaseSystem.chunklist", r"./BaseSystem.dmg", r"./InstallESDDmg.pkg", r"./InstallInfo.plist"]
 
 def copyfiles(sharedsupportloc):
     for f in neededfiles:
@@ -209,8 +209,6 @@ def packimg():
 def checkfiles():
     clear()
     title("Checking Required Files...")
-    folder = input("Please drag and drop your download macOS folder here: ")
-    os.chdir(loc)
     time.sleep(0.5)
     for f in neededfiles:
         if isfile(f) == False:
@@ -233,13 +231,10 @@ def mainmenu():
     if option == "Q" or option == "q":
         quit()
     elif option == "A" or option == "a":
-        os.chdir(loc)
         packapp()
     elif option == "B" or option == "b":
-        os.chdir(loc)
         packimg()
     elif option == "P" or option == "p":
-        os.chdir(loc)
         SharedSupport()
     else:
         mainmenu()
