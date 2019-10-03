@@ -68,7 +68,7 @@ def packapp():
     # from BaseSystem.dmg
 
     noline("Mounting BaseSystem.dmg... ")
-    os.system("hdiutil attach ../BaseSystem.dmg > /dev/null")
+    os.system("hdiutil attach ./BaseSystem.dmg > /dev/null")
     print("Done.")
 
     noline("Copying Installer from BaseSystem.dmg... ")
@@ -185,15 +185,15 @@ def packimg():
 
     noline("Converting BaseSystem.dmg to have Read and Write Access... ")
     os.chdir(r"../")
-    os.system("hdiutil convert -format UDRW -o ./BaseSystem.dmg ../BaseSystem.dmg")
+    os.system("hdiutil convert -format UDRW -o ./BaseSystem.dmg ./BaseSystem-RW.dmg")
     print("Done.")
 
     noline("Extend BaseSystem.dmg capacity... ")
-    os.system("hdiutil resize -size 8192m ./BaseSystem.dmg")
+    os.system("hdiutil resize -size 8192m ./BaseSystem-RW.dmg")
     print("Done.")
 
     noline("Mounting BaseSystem.dmg... ")
-    os.system("hdiutil attach ./BaseSystem.dmg")
+    os.system("hdiutil attach ./BaseSystem-RW.dmg")
     print("Done.")
 
     noline("Moving files in place... ")
