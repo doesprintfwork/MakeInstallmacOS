@@ -138,74 +138,6 @@ def SharedSupport():
 
     mainmenu()
 
-def packimg():
-    clear()
-
-    title("Choose macOS Version")
-    print("1: High Sierra")
-    print("2: Mojave")
-    print("Q: Quit")
-    print("M: Main Menu")
-    option = input("Please enter an option: ")
-    version = ""
-    diskname = ""
-    if option == "1":
-        version = "High Sierra"
-        diskname = "OS X Base System"
-    elif option == "2":
-        version = "Mojave"
-        diskname = "macOS Base System"
-    elif option == "Q":
-        quit()
-    elif option == "M":
-        mainmenu()
-    else:
-        SharedSupport()
-
-    clear()
-
-    title("Packing files to SharedSupport")
-
-    noline("Making Directories... ")
-
-    os.mkdir("SharedSupport")
-    print("Done.")
-
-    print("Copying files... ")
-
-    copyfiles(r"./SharedSupport")
-    print("Done.")
-
-    noline("Editting InstallInfo.plist... ")
-
-    os.chdir(r"./SharedSupport")
-    editplist()
-    os.rename("InstallESDDmg.pkg", "InstallESD.dmg")
-    print("Done.")
-
-    noline("Converting BaseSystem.dmg to have Read and Write Access... ")
-    os.chdir(r"../")
-    os.system("hdiutil convert -format UDRW -o ./BaseSystem.dmg ./BaseSystem-RW.dmg")
-    print("Done.")
-
-    noline("Extend BaseSystem.dmg capacity... ")
-    os.system("hdiutil resize -size 8192m ./BaseSystem-RW.dmg")
-    print("Done.")
-
-    noline("Mounting BaseSystem.dmg... ")
-    os.system("hdiutil attach ./BaseSystem-RW.dmg")
-    print("Done.")
-
-    noline("Moving files in place... ")
-    shutil.move(r"./SharedSupport", r"/Volumes/{}/Install macOS {}.app/Contents".format(diskname, version))
-    print("Done.")
-
-
-    print("All Done.")
-    time.sleep(1)
-
-    mainmenu()
-
 def checkfiles():
     clear()
     title("Checking Required Files...")
@@ -232,8 +164,6 @@ def mainmenu():
         quit()
     elif option == "A" or option == "a":
         packapp()
-    elif option == "B" or option == "b":
-        packimg()
     elif option == "P" or option == "p":
         SharedSupport()
     else:
