@@ -1,7 +1,7 @@
 import os, shutil, plistlib, time, sys
 
 line = "--------------------------------------------------"
-folder = ""
+loc = ""
 
 def noline(string):
     print(string,end="")
@@ -22,7 +22,6 @@ neededfiles = [r"../AppleDiagnostics.chunklist", r"../AppleDiagnostics.dmg", r".
 def copyfiles(sharedsupportloc):
     for f in neededfiles:
         noline("    Copying {}... ".format(f))
-
         shutil.copy(f, sharedsupportloc)
         print("Done.")
 
@@ -211,7 +210,7 @@ def checkfiles():
     clear()
     title("Checking Required Files...")
     folder = input("Please drag and drop your download macOS folder here: ")
-    os.chdir(folder)
+    os.chdir(loc)
     time.sleep(0.5)
     for f in neededfiles:
         if isfile(f) == False:
@@ -234,13 +233,13 @@ def mainmenu():
     if option == "Q" or option == "q":
         quit()
     elif option == "A" or option == "a":
-        os.chdir(folder)
+        os.chdir(loc)
         packapp()
     elif option == "B" or option == "b":
-        os.chdir(folder)
+        os.chdir(loc)
         packimg()
     elif option == "P" or option == "p":
-        os.chdir(folder)
+        os.chdir(loc)
         SharedSupport()
     else:
         mainmenu()
