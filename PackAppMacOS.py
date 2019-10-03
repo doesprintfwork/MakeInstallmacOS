@@ -1,7 +1,7 @@
 import os, shutil, plistlib, time, sys
 
 line = "--------------------------------------------------"
-folder =""
+folder = ""
 
 def noline(string):
     print(string,end="")
