@@ -1,6 +1,7 @@
 import os, shutil, plistlib, time, sys
 
 line = "--------------------------------------------------"
+loc = ""
 
 def quit():
     print("Goodbye! Have a good day!")
@@ -31,6 +32,8 @@ def copyfiles(sharedsupportloc):
 def checkfiles():
     clear()
     title("Checking Required Files...")
+    version = input("Please drag and drop the downloaded folder: ")
+    os.chdir(loc)
     time.sleep(0.5)
     for f in neededfiles:
         if isfile(f) == False:
@@ -152,10 +155,10 @@ def mainmenu():
     if option == "Q" or option == "q":
         quit()
     elif option == "B" or option == "b":
-        os.chdir(os.path.dirname(os.path.realpath(__file__)))
+        os.chdir(loc)
         BaseSystem()
     elif option == "P" or option == "p":
-        os.chdir(os.path.dirname(os.path.realpath(__file__)))
+        os.chdir(loc)
         SharedSupport()
     else:
         mainmenu()
