@@ -1,6 +1,7 @@
 import os, shutil, plistlib, time, sys
 
 line = "--------------------------------------------------"
+folder =""
 
 def noline(string):
     print(string,end="")
@@ -209,6 +210,8 @@ def packimg():
 def checkfiles():
     clear()
     title("Checking Required Files...")
+    folder = input("Please drag and drop your download macOS folder here: ")
+    os.chdir(folder)
     time.sleep(0.5)
     for f in neededfiles:
         if isfile(f) == False:
@@ -231,13 +234,13 @@ def mainmenu():
     if option == "Q" or option == "q":
         quit()
     elif option == "A" or option == "a":
-        os.chdir(os.path.dirname(os.path.realpath(__file__)))
+        os.chdir(folder)
         packapp()
     elif option == "B" or option == "b":
-        os.chdir(os.path.dirname(os.path.realpath(__file__)))
+        os.chdir(folder)
         packimg()
     elif option == "P" or option == "p":
-        os.chdir(os.path.dirname(os.path.realpath(__file__)))
+        os.chdir(folder)
         SharedSupport()
     else:
         mainmenu()
