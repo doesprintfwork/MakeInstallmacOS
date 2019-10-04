@@ -87,7 +87,6 @@ def mainmenu():
     if option == "Q" or option == "q":
         quit()
     elif option == "P" or option == "p":
-        os.chdir(loc)
         SharedSupport()
     else:
         mainmenu()
