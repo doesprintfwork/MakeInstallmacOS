@@ -1,7 +1,6 @@
 import os, shutil, plistlib, time, sys
 
 line = "--------------------------------------------------"
-loc = ""
 
 def quit():
     print("Goodbye! Have a good day!")
@@ -32,15 +31,13 @@ def copyfiles(sharedsupportloc):
 def checkfiles():
     clear()
     title("Checking Required Files...")
-    loc = input("Please drag and drop the downloaded folder: ")
-    print (loc)
-    os.system("cd {}".format(loc))
     time.sleep(0.5)
     for f in neededfiles:
         if isfile(f) == False:
             print("Missing Files.")
             os.system("pause")
             sys.exit()
+    print ("Done.")
     time.sleep(1)
 
 neededfiles = [r"./AppleDiagnostics.chunklist", r"./AppleDiagnostics.dmg", r"./BaseSystem.chunklist", r"./BaseSystem.dmg", r"./InstallESDDmg.pkg", r"./InstallInfo.plist"]
